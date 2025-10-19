@@ -26,7 +26,7 @@
 
 module cv32e40x_compressed_decoder import cv32e40x_pkg::*;
 #(
-    parameter bit          ZC_EXT    = 0,
+    parameter zc_ext_e          ZC_EXT    = ZC_NONE,
     parameter b_ext_e      B_EXT     = B_NONE,
     parameter m_ext_e      M_EXT     = M_NONE
  )
@@ -83,7 +83,7 @@ module cv32e40x_compressed_decoder import cv32e40x_pkg::*;
 
 
             3'b100: begin
-              if (ZC_EXT) begin
+              if (`ZC_HAS_ZCB(ZC_EXT)) begin
                 unique case (instr[12:10])
                   3'b000: begin
                     // c.lbu -> lbu rd', imm(rs1')
@@ -224,7 +224,7 @@ module cv32e40x_compressed_decoder import cv32e40x_pkg::*;
                     end
 
                     3'b110: begin
-                      if (ZC_EXT && (M_EXT != M_NONE)) begin
+                      if (`ZC_HAS_ZCB(ZC_EXT) && (M_EXT != M_NONE)) begin
                         // c.mul -> mul rsd', rsd', rs2'
                         instr_o.bus_resp.rdata = {7'b0000001, 2'b01, instr[4:2], 2'b01, instr[9:7], 3'b000, 2'b01, instr[9:7], OPCODE_OP};
                       end else begin
@@ -234,7 +234,7 @@ module cv32e40x_compressed_decoder import cv32e40x_pkg::*;
                     end
 
                     3'b111: begin
-                      if (ZC_EXT) begin
+                      if (`ZC_HAS_ZCB(ZC_EXT)) begin
                         unique case (instr[4:2])
                           3'b000: begin
                             // c.zext.b -> andi rsd', rsd', 0xff

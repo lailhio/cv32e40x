@@ -36,6 +36,7 @@ module cv32e40x_core import cv32e40x_pkg::*;
   parameter a_ext_e                     A_EXT                                   = A_NONE,
   parameter b_ext_e                     B_EXT                                   = B_NONE,
   parameter m_ext_e                     M_EXT                                   = M,
+  parameter zc_ext_e                    ZC_EXT                                  = ZC_NONE,
   parameter bit                         DEBUG                                   = 1,
   parameter logic [31:0]                DM_REGION_START                         = 32'hF0000000,
   parameter logic [31:0]                DM_REGION_END                           = 32'hF0003FFF,
@@ -142,9 +143,6 @@ module cv32e40x_core import cv32e40x_pkg::*;
   // Number of register file read ports
   // Core will only use two, but X_EXT may mandate 2 or 3
   localparam int unsigned REGFILE_NUM_READ_PORTS = X_EXT ? X_NUM_RS : 2;
-
-  // Zc is always present
-  localparam bit ZC_EXT = 1;
 
   // Determine alignedness of mtvt
   // mtvt[31:N] holds mtvt table entry

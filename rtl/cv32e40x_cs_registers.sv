@@ -35,7 +35,7 @@ module cv32e40x_cs_registers import cv32e40x_pkg::*;
   parameter bit          X_EXT                = 0,
   parameter logic [31:0] X_MISA               =  32'h00000000,
   parameter logic [1:0]  X_ECS_XS             =  2'b00, // todo:XIF implement related mstatus bitfields (but only if X_EXT = 1)
-  parameter bit          ZC_EXT               = 0,
+  parameter zc_ext_e          ZC_EXT               = ZC_NONE,
   parameter bit          CLIC                 = 0,
   parameter int unsigned CLIC_ID_WIDTH        = 5,
   parameter int unsigned NUM_MHPMCOUNTERS     = 1,
@@ -123,7 +123,7 @@ module cv32e40x_cs_registers import cv32e40x_pkg::*;
 
   localparam logic [31:0] CORE_MISA =
     (32'(A_EXT == A)      <<  0) | // A - Atomic Instructions extension
-    (32'(1)               <<  2) | // C - Compressed extension
+    (32'(ZC_EXT != ZC_NONE) <<  2) | // C - Compressed extension (Zca enabled when ZC_EXT != ZC_NONE)
     (32'(RV32 == RV32E)   <<  4) | // E - RV32E/64E base ISA
     (32'(RV32 == RV32I)   <<  8) | // I - RV32I/64I/128I base ISA
     (32'(M_EXT == M)      << 12) | // M - Integer Multiply/Divide extension
@@ -350,7 +350,7 @@ module cv32e40x_cs_registers import cv32e40x_pkg::*;
     case (csr_raddr)
       // jvt: Jump vector table
       CSR_JVT:  begin
-        if (ZC_EXT) begin
+        if (`ZC_HAS_ZCMT(ZC_EXT)) begin
           csr_rdata_int = jvt_rdata;
         end else begin
           csr_rdata_int    = '0;
@@ -857,7 +857,7 @@ module cv32e40x_cs_registers import cv32e40x_pkg::*;
 
         // jvt: Jump vector table
         CSR_JVT: begin
-          if (ZC_EXT) begin
+          if (`ZC_HAS_ZCMT(ZC_EXT)) begin
             jvt_we = 1'b1;
           end
         end

@@ -1608,7 +1608,27 @@ typedef struct packed {
     regnum_t        sreg;                  // Current s-register being pushed/popped
   } pushpop_decode_s;
 
+  typedef enum logic [3:0] {
+    ZC_NONE         = 4'b0000,  // 完全禁用
+    ZC_ZCA          = 4'b0001,  // 仅基础 Zca
+    ZC_ZCA_ZCB      = 4'b0011,  // Zca + Zcb
+    ZC_ZCA_ZCMP     = 4'b0101,  // Zca + Zcmp (需要 sequencer)
+    ZC_ZCA_ZCMT     = 4'b1001,  // Zca + Zcmt (需要 sequencer + JVT)
+    ZC_ZCA_ZCB_ZCMP = 4'b0111,  // Zca + Zcb + Zcmp
+    ZC_ZCA_ZCB_ZCMT = 4'b1011,  // Zca + Zcb + Zcmt
+    ZC_ZCA_ZCMP_ZCMT= 4'b1101,  // Zca + Zcmp + Zcmt
+    ZC_FULL         = 4'b1111   // 全部启用
+  } zc_ext_e;
+  // 位域访问宏
+  `define ZC_HAS_ZCA(zc)   (zc[0])
+  `define ZC_HAS_ZCB(zc)   (zc[1])
+  `define ZC_HAS_ZCMP(zc)  (zc[2])
+  `define ZC_HAS_ZCMT(zc)  (zc[3])
 
+  // Sequencer 需求判断（Zcmp 或 Zcmt 任一启用）
+  `define ZC_NEEDS_SEQ(zc) (zc[2] | zc[3])
+
+  
   // Map any of S0-S11 to X-registers
   function automatic regnum_t sn_to_regnum(regnum_t snum);
     case (snum)

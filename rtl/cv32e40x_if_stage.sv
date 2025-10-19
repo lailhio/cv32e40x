@@ -38,7 +38,7 @@ module cv32e40x_if_stage import cv32e40x_pkg::*;
   parameter int unsigned MTVT_ADDR_WIDTH = 26,
   parameter bit          CLIC            = 1'b0,
   parameter int unsigned CLIC_ID_WIDTH   = 5,
-  parameter bit          ZC_EXT          = 0,
+  parameter zc_ext_e     ZC_EXT          = ZC_NONE,
   parameter m_ext_e      M_EXT           = M_NONE,
   parameter bit          DEBUG           = 1,
   parameter logic [31:0] DM_REGION_START = 32'hF0000000,
@@ -444,20 +444,31 @@ module cv32e40x_if_stage import cv32e40x_pkg::*;
     end
   end
 
-  cv32e40x_compressed_decoder
-  #(
-      .ZC_EXT ( ZC_EXT ),
-      .B_EXT  ( B_EXT  ),
-      .M_EXT  ( M_EXT  )
-  )
-  compressed_decoder_i
-  (
-    .instr_i            ( prefetch_instr          ),
-    .instr_is_ptr_i     ( ptr_in_if_o             ),
-    .instr_o            ( instr_decompressed      ),
-    .is_compressed_o    ( instr_compressed        ),
-    .illegal_instr_o    ( illegal_c_insn          )
-  );
+  // Compressed decoder instantiation (optional based on ZC_EXT)
+  generate
+    if (ZC_EXT != ZC_NONE) begin : gen_compressed_decoder
+      cv32e40x_compressed_decoder
+      #(
+          .ZC_EXT ( ZC_EXT ),
+          .B_EXT  ( B_EXT  ),
+          .M_EXT  ( M_EXT  )
+      )
+      compressed_decoder_i
+      (
+        .instr_i            ( prefetch_instr          ),
+        .instr_is_ptr_i     ( ptr_in_if_o             ),
+        .instr_o            ( instr_decompressed      ),
+        .is_compressed_o    ( instr_compressed        ),
+        .illegal_instr_o    ( illegal_c_insn          )
+      );
+    end else begin : gen_no_compressed_decoder
+      // When compressed extension is disabled, pass through instruction unchanged
+      // and mark all compressed instructions (instr[1:0] != 2'b11) as illegal
+      assign instr_decompressed = prefetch_instr;
+      assign instr_compressed   = (prefetch_instr.bus_resp.rdata[1:0] != 2'b11) && !ptr_in_if_o;
+      assign illegal_c_insn     = instr_compressed;
+    end
+  endgenerate
 
   // Setting predec_ready to id_ready_i here instead of passing it through the predecoder.
   // Predecoder is purely combinatorial and is always ready for new inputs
@@ -469,7 +480,7 @@ module cv32e40x_if_stage import cv32e40x_pkg::*;
   assign seq_instr_valid = prefetch_valid;
 
   generate
-    if (ZC_EXT) begin : gen_seq
+    if (`ZC_NEEDS_SEQ(ZC_EXT)) begin : gen_seq
       cv32e40x_sequencer
         #(.RV32(RV32))
       sequencer_i
