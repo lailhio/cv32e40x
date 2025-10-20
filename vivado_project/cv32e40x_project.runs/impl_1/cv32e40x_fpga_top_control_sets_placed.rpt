@@ -1,0 +1,159 @@
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
+| Date         : Mon Oct 20 04:57:01 2025
+| Host         : KastriaL running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file cv32e40x_fpga_top_control_sets_placed.rpt
+| Design       : cv32e40x_fpga_top
+| Device       : xc7a35ti
+----------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    81 |
+|    Minimum number of control sets                        |    81 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    78 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    81 |
+| >= 0 to < 4        |     0 |
+| >= 4 to < 6        |     5 |
+| >= 6 to < 8        |     4 |
+| >= 8 to < 10       |     3 |
+| >= 10 to < 12      |     1 |
+| >= 12 to < 14      |     2 |
+| >= 14 to < 16      |     0 |
+| >= 16              |    66 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |               0 |            0 |
+| No           | No                    | Yes                    |             151 |           70 |
+| No           | Yes                   | No                     |               0 |            0 |
+| Yes          | No                    | No                     |               0 |            0 |
+| Yes          | No                    | Yes                    |            2291 |         1217 |
+| Yes          | Yes                   | No                     |               0 |            0 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++------------------+---------------------------------------------------------------------------------------------+-------------------------------------------------------+------------------+----------------+
+|   Clock Signal   |                                        Enable Signal                                        |                    Set/Reset Signal                   | Slice Load Count | Bel Load Count |
++------------------+---------------------------------------------------------------------------------------------+-------------------------------------------------------+------------------+----------------+
+|  clk_i_IBUF_BUFG | u_core/if_stage_i/if_id_pipe_o_reg[instr][bus_resp][rdata][5]_0[0]                          | u_core/register_file_wrapper_i/register_file_i/rst_ni |                2 |              4 |
+|  clk_i_IBUF_BUFG | u_core/if_stage_i/prefetch_unit_i/alignment_buffer_i/FSM_sequential_ctrl_fsm_cs_reg[0][0]   | u_core/register_file_wrapper_i/register_file_i/rst_ni |                2 |              4 |
+|  clk_i_IBUF_BUFG | u_core/id_stage_i/id_ex_pipe_o_reg[rf_we]_1[0]                                              | u_core/register_file_wrapper_i/register_file_i/rst_ni |                3 |              5 |
+|  clk_i_IBUF_BUFG | u_core/if_stage_i/if_id_pipe_o_reg[instr][bus_resp][rdata][6]_0[0]                          | u_core/register_file_wrapper_i/register_file_i/rst_ni |                3 |              5 |
+|  clk_i_IBUF_BUFG | u_core/if_stage_i/if_id_pipe_o_reg[last_op]_0[0]                                            | u_core/register_file_wrapper_i/register_file_i/rst_ni |                2 |              5 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/div.div_i/cnt_q                                                           | u_core/register_file_wrapper_i/register_file_i/rst_ni |                2 |              6 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[instr_valid]_2[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |                4 |              6 |
+|  clk_i_IBUF_BUFG | u_core/load_store_unit_i/mpu_i/E[0]                                                         | u_core/register_file_wrapper_i/register_file_i/rst_ni |                5 |              6 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[csr_addr][1]_4                                           | u_core/register_file_wrapper_i/register_file_i/rst_ni |                4 |              7 |
+|  clk_i_IBUF_BUFG | u_core/id_stage_i/id_ex_pipe_o_reg[sys_en]_0                                                | u_core/register_file_wrapper_i/register_file_i/rst_ni |                6 |              8 |
+|  clk_i_IBUF_BUFG | u_core/if_stage_i/if_id_pipe_o_reg[instr_valid]_0                                           | u_core/register_file_wrapper_i/register_file_i/rst_ni |                6 |              8 |
+|  clk_i_IBUF_BUFG | u_core/if_stage_i/prefetch_unit_i/alignment_buffer_i/instr_cnt_q[3]_i_4                     | u_core/register_file_wrapper_i/register_file_i/rst_ni |                5 |              8 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/mcountinhibit_q_reg[2]_0                                                  | u_core/register_file_wrapper_i/register_file_i/rst_ni |                6 |             10 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[csr_addr][1]_2                                           | u_core/register_file_wrapper_i/register_file_i/rst_ni |                8 |             12 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/gen_triggers.tdata1_we_int                                                | u_core/register_file_wrapper_i/register_file_i/rst_ni |                9 |             13 |
+|  clk_i_IBUF_BUFG | u_core/controller_i/controller_fsm_i/E[0]                                                   | u_core/register_file_wrapper_i/register_file_i/rst_ni |                5 |             16 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[csr_addr][1]_1[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |                7 |             16 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/mie_we18_out                                                              | u_core/register_file_wrapper_i/register_file_i/rst_ni |               11 |             19 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[csr_addr][3]_0                                           | u_core/register_file_wrapper_i/register_file_i/rst_ni |               14 |             26 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/FSM_sequential_ctrl_fsm_cs_reg[0]_1                                       | u_core/register_file_wrapper_i/register_file_i/rst_ni |               23 |             31 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[csr_addr][1]_3                                           | u_core/register_file_wrapper_i/register_file_i/rst_ni |               10 |             31 |
+|  clk_i_IBUF_BUFG | u_core/if_stage_i/prefetch_unit_i/alignment_buffer_i/is_tbljmp_ptr_q_reg_2[0]               | u_core/register_file_wrapper_i/register_file_i/rst_ni |               15 |             31 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[csr_addr][5]_0                                           | u_core/register_file_wrapper_i/register_file_i/rst_ni |               17 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/div.div_i/remainder_q                                                     | u_core/register_file_wrapper_i/register_file_i/rst_ni |                8 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][2]_0[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               20 |             32 |
+|  clk_i_IBUF_BUFG | u_core/if_stage_i/prefetch_unit_i/alignment_buffer_i/addr_q[31]_i_1_n_0                     | u_core/register_file_wrapper_i/register_file_i/rst_ni |               15 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][2]_2[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               22 |             32 |
+|  clk_i_IBUF_BUFG | u_core/id_stage_i/id_ex_pipe_o_reg[rf_we]_0[0]                                              | u_core/register_file_wrapper_i/register_file_i/rst_ni |               21 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[csr_addr][2]_0                                           | u_core/register_file_wrapper_i/register_file_i/rst_ni |               18 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][1]_0[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               20 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][2]_3[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               17 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/tdata2_we7_out                                                            | u_core/register_file_wrapper_i/register_file_i/rst_ni |               13 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/wr_en_i                                                                   | u_core/register_file_wrapper_i/register_file_i/rst_ni |               19 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[csr_addr][1]_0[1]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               18 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[csr_addr][1]_0[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |                7 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][1]_4[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               24 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/mcountinhibit_q_reg[0][0]                                                 | u_core/register_file_wrapper_i/register_file_i/rst_ni |               12 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][2]_4[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               12 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][0]_11[0]                                       | u_core/register_file_wrapper_i/register_file_i/rst_ni |               18 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][0]_13[0]                                       | u_core/register_file_wrapper_i/register_file_i/rst_ni |               16 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][4]_5[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               18 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][1]_3[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               19 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][0]_1[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               10 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][0]_14[0]                                       | u_core/register_file_wrapper_i/register_file_i/rst_ni |               16 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][1]_1[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               21 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][0]_10[0]                                       | u_core/register_file_wrapper_i/register_file_i/rst_ni |               18 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][0]_5[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               22 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][0]_12[0]                                       | u_core/register_file_wrapper_i/register_file_i/rst_ni |               26 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][2]_1[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               26 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][0]_6[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               22 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][4]_1[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               15 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][4]_2[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               12 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][4]_3[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               22 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][0]_0[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               20 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][0]_2[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               15 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][0]_4[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               18 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][0]_7[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               22 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][1]_2[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               19 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/mcountinhibit_q_reg[2][0]                                                 | u_core/register_file_wrapper_i/register_file_i/rst_ni |               10 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/mcountinhibit_q_reg[2][1]                                                 | u_core/register_file_wrapper_i/register_file_i/rst_ni |               16 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][4]_4[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               17 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/mcountinhibit_q_reg[0][1]                                                 | u_core/register_file_wrapper_i/register_file_i/rst_ni |               15 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][3]_0[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               24 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][0]_3[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               15 |             32 |
+|  clk_i_IBUF_BUFG | u_core/if_stage_i/if_id_pipe_o_reg[instr][bus_resp][rdata][2]_0[0]                          | u_core/register_file_wrapper_i/register_file_i/rst_ni |               19 |             32 |
+|  clk_i_IBUF_BUFG | u_core/if_stage_i/if_id_pipe_o_reg[instr][bus_resp][rdata][3]_0[0]                          | u_core/register_file_wrapper_i/register_file_i/rst_ni |               10 |             32 |
+|  clk_i_IBUF_BUFG | u_core/if_stage_i/if_id_pipe_o_reg[instr][bus_resp][rdata][6]_1[0]                          | u_core/register_file_wrapper_i/register_file_i/rst_ni |               11 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][0]_9[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               17 |             32 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/ex_wb_pipe_o_reg[rf_waddr][0]_8[0]                                        | u_core/register_file_wrapper_i/register_file_i/rst_ni |               22 |             32 |
+|  clk_i_IBUF_BUFG | u_core/load_store_unit_i/mpu_i/lsu_we_q_reg[0]                                              | u_core/register_file_wrapper_i/register_file_i/rst_ni |               20 |             32 |
+|  clk_i_IBUF_BUFG | u_core/if_stage_i/prefetch_unit_i/alignment_buffer_i/resp_q[0][bus_resp][rdata][31]_i_1_n_0 | u_core/register_file_wrapper_i/register_file_i/rst_ni |               16 |             35 |
+|  clk_i_IBUF_BUFG | u_core/if_stage_i/prefetch_unit_i/alignment_buffer_i/resp_q[2][bus_resp][rdata][31]_i_1_n_0 | u_core/register_file_wrapper_i/register_file_i/rst_ni |               25 |             35 |
+|  clk_i_IBUF_BUFG | u_core/if_stage_i/prefetch_unit_i/alignment_buffer_i/resp_q[1][bus_resp][rdata][31]_i_1_n_0 | u_core/register_file_wrapper_i/register_file_i/rst_ni |               22 |             35 |
+|  clk_i_IBUF_BUFG | u_core/ex_stage_i/mul.mult_i/mulh_acc                                                       | u_core/register_file_wrapper_i/register_file_i/rst_ni |               13 |             35 |
+|  clk_i_IBUF_BUFG | u_core/id_stage_i/id_ex_pipe_o_reg[instr_valid]_0                                           | u_core/register_file_wrapper_i/register_file_i/rst_ni |               24 |             47 |
+|  clk_i_IBUF_BUFG | u_core/id_stage_i/id_ex_pipe_o_reg[csr_en]_1[0]                                             | u_core/register_file_wrapper_i/register_file_i/rst_ni |               22 |             47 |
+|  clk_i_IBUF_BUFG | u_core/controller_i/controller_fsm_i/p_9_out                                                | u_core/register_file_wrapper_i/register_file_i/rst_ni |               23 |             47 |
+|  clk_i_IBUF_BUFG | u_core/id_stage_i/FSM_sequential_state_reg[1][0]                                            | u_core/register_file_wrapper_i/register_file_i/rst_ni |               17 |             64 |
+|  clk_i_IBUF_BUFG | u_core/if_stage_i/if_id_pipe_o_reg[instr][bus_resp][err]_0[0]                               | u_core/register_file_wrapper_i/register_file_i/rst_ni |               36 |             64 |
+|  clk_i_IBUF_BUFG | u_core/if_stage_i/prefetch_unit_i/alignment_buffer_i/if_id_pipe_o                           | u_core/register_file_wrapper_i/register_file_i/rst_ni |               33 |             69 |
+|  clk_i_IBUF_BUFG |                                                                                             | u_core/register_file_wrapper_i/register_file_i/rst_ni |               70 |            151 |
++------------------+---------------------------------------------------------------------------------------------+-------------------------------------------------------+------------------+----------------+
+
+

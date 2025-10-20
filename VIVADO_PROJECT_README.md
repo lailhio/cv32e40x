@@ -52,6 +52,24 @@ set fpga_part "xc7a35ticsg324-1L"
 | Zynq-7000 | `xc7z020clg400-1` | SoC (ARM + FPGA) |
 | Zynq UltraScale+ | `xczu9eg-ffvb1156-2-e` | 高端 SoC |
 
+## 📌 重要说明：FPGA 顶层模块
+
+**默认顶层模块：`cv32e40x_fpga_top`**
+
+本项目提供了一个 FPGA 友好的顶层包装器模块 `cv32e40x_fpga_top.sv`，该模块：
+- ✅ 集成了片上 BRAM 用于指令和数据存储（64KB）
+- ✅ 简化了外部接口，仅需 **约20个I/O引脚**（适合小封装FPGA）
+- ✅ 内置简单测试程序
+- ✅ 提供状态LED输出用于调试
+
+**I/O引脚数量对比：**
+- `cv32e40x_core`（CPU核心）：~723个信号（不适合直接作为顶层）
+- `cv32e40x_fpga_top`（FPGA包装器）：20个信号（适合小型FPGA）
+
+如果您遇到 **"IO Placement failed due to overutilization"** 错误，说明使用了错误的顶层模块。请确保：
+1. 使用 `cv32e40x_fpga_top` 作为顶层模块（脚本已默认配置）
+2. 根据您的开发板修改 `constraints/cv32e40x_fpga_top.xdc` 中的引脚定义
+
 ## 📁 项目结构
 
 脚本会创建以下项目结构：

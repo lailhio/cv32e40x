@@ -101,8 +101,8 @@ puts "\n=========================================="
 puts "Setting top module..."
 puts "=========================================="
 
-set_property top cv32e40x_core [current_fileset]
-puts "Top module set to: cv32e40x_core"
+set_property top cv32e40x_fpga_top [current_fileset]
+puts "Top module set to: cv32e40x_fpga_top"
 
 ################################################################################
 # Add constraint files
